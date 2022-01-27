@@ -10,12 +10,14 @@ files <- list.files(path, full.names = TRUE, pattern = "*.csv")
 raw_df <- map_df(files, ~read_csv(.))
 
 #TRANSFOMING THE DATA
-#add necessary columns (ride duration/distance, month of the year, day of the week)
+#add necessary columns (ride duration, month of the year, day of the week, hour of day)
 transformed_df <- raw_df %>%
   mutate(ride_duration = as.numeric(difftime(ended_at, started_at, unit="mins"))) %>% 
   mutate(ride_distance = distHaversine(cbind(start_lng, start_lat), cbind(end_lng, end_lat))) %>%
+  mutate(ride_year = year(started_at)) %>%
+  mutate(ride_month = month(started_at, label = TRUE)) %>%
   mutate(day_of_week = weekdays(started_at)) %>%
-  mutate(ride_month = month(started_at, label = TRUE))
+  mutate(hour_of_day = hour(started_at))
 
 #CLEANING THE DATA
 #No duplicate entries found in pre-checks!
@@ -32,7 +34,7 @@ cleaned_df <- transformed_df %>%
 #ANALYSE DATA
 #Membership type, month, day of week aggregated by average and max duration and distance
 result_df <- cleaned_df %>%
-  group_by(member_casual, ride_month, day_of_week) %>%
+  group_by(member_casual, rideable_type, ride_year, ride_month, day_of_week, hour_of_day) %>%
   summarise(number_of_rides = n(), avg_ride_duration = mean(ride_duration), avg_ride_distance = mean(ride_distance))
 
 #WRITE RESULT DATAFRAME TO CSV
