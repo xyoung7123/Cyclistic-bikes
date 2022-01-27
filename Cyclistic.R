@@ -36,5 +36,7 @@ result_df <- cleaned_df %>%
   summarise(number_of_rides = n(), avg_ride_duration = mean(ride_duration), avg_ride_distance = mean(ride_distance))
 
 #WRITE RESULT DATAFRAME TO CSV
-result_file <- paste(getwd(), "/analysis_results.csv", sep = "") #assign filename + set path to wd
+#assign filename + set path to wd
+#write file to path
+result_file <- paste(getwd(), "/analysis_results.csv", sep = "") 
 write_csv(result_df, result_file)
