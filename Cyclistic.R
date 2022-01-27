@@ -41,16 +41,6 @@ result_df %>%
     geom_vline()
 
 
-##duplicate rides. Checked using distinct(); 0 duplicate rides
-##rides not starting from a station. Checked using filter() with is.na(); 690,809 rides found
-##rides not ending at a station. Checked using filter() with is.na(); 739,170 rides found
-##check invalid entries for rideable_type, member_casual. No invalid entries
-##check for rides with negative or 0 duration. 653 cases found
-#check outliers in duration and distance covered
-##check and ensure proper data types for each column
-## 4,311,258 out of 5,595,063 records left after cleaning
-
-
 #EXPORT SUMMARY DATA INTO CSV
 write_csv(summary_df, "C:\\Users\\HP\\Documents\\Data Analytics Projects\\Cyclistic\\Analysis_Results.csv")
 
