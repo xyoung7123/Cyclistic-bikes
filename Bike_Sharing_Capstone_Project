@@ -1,4 +1,13 @@
-#Load packages
+#Install & Load packages for wrangling
+Install.packages(tidyverse)
+Install.packages(lubridate)
+Install.packages(tidyverse)
+install.packages("here")
+library("here")
+install.packages("skimr")
+library("skimr")
+install.packages("janitor")
+library("janitor")
 library(tidyverse)
 library(geosphere)
 library(lubridate)
